@@ -1,9 +1,12 @@
 #include<iostream>
+#include<cstring>
+#include<string>
 using namespace std;
 void input(char sentence[], char key[]);
 void sequence(char sentence[], char key[], char words_sequence[]);
 void encrypt(char sentence[], char words_sequence[], char encrypted[]);
 void decrypt(char sentence[], char words_sequence[], char encrypted[]);
+void encrypt_file();
 void display(char[]);
 int main()
 {
@@ -16,7 +19,9 @@ int main()
             cout << "===========Menu============" << endl;
             cout << "1. Encrypt" << endl;
             cout << "2. Decrypt" << endl;
-            cout << "3. Exit" << endl;
+            cout << "3. Ecrypt a File" << endl;
+            cout << "4. Decrypt a File" << endl;
+            cout << "5. Exit" << endl;
             cout << "======Vigenere Cipher======" << endl;
             cout << "Enter Choice: ";
             cin >> choice;
@@ -47,7 +52,20 @@ int main()
         }
         case 3:
         {
+            break;
+        }
+        case 4:
+        {
+            break;
+        }
+        case 5:
+        {
             cout << "Exited the Program!" << endl;
+            break;
+        }
+        default:
+        {
+            cout << "Invalid Choice: ";
             break;
         }
         }

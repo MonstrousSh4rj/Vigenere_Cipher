@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Vigenere_Cipher/Vigenere_Cipher.vcxproj" />
+  <Project Path="Vigenere_Cipher/Vigenere_Cipher.vcxproj" Id="4da7dc1c-4cb9-4bb8-8a1b-751832b322dc" />
 </Solution>
