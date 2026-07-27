@@ -79,7 +79,7 @@ int main()
         }
         default:
         {
-            cout << "Invalid Choice: ";
+            cout << "Invalid Choice :(";
             break;
         }
         }
