@@ -92,7 +92,7 @@ void input(char sentence[], char key[])
     Sentence:
     cout << "Enter sentence: ";
     cin.getline(sentence, 100);
-    for (int a = 0; key[a] != '\0'; a++)
+    for (int a = 0; sentence[a] != '\0'; a++)
     {
         if (!((sentence[a] >= 'A' && sentence[a] <= 'Z') || (sentence[a] >= 'a' && sentence[a] <= 'z')))
         {
@@ -102,7 +102,7 @@ void input(char sentence[], char key[])
     }
     Key:
     cout << "Enter Key: ";
-    cin.getline(sentence, 100);
+    cin.getline(key, 100);
     for (int a = 0; key[a] != '\0'; a++)
     {
         if (!((key[a] >= 'A' && key[a] <= 'Z') || (key[a] >= 'a' && key[a] <= 'z')))
