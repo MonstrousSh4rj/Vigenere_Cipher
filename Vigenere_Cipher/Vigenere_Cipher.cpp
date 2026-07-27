@@ -315,22 +315,22 @@ void decrypt_line_file(string line, char key_sequence_line[], int& index_decrypt
         {
             if (key_sequence_line[index] >= 'A' && key_sequence_line[index_decrypt] <= 'Z')
             {
-                decrypted[index] = (((line[index] - 'A') + (key_sequence_line[index_decrypt] + 'A') + 26) % 26) + 'A';
+                decrypted[index] = (((line[index] - 'A') - (key_sequence_line[index_decrypt] - 'A') + 26) % 26) + 'A';
             }
             else if (key_sequence_line[index] >= 'a' && key_sequence_line[index_decrypt] <= 'z')
             {
-                decrypted[index] = (((line[index] - 'A') + (key_sequence_line[index_decrypt] + 'a') + 26) % 26) + 'A';
+                decrypted[index] = (((line[index] - 'A') - (key_sequence_line[index_decrypt] - 'a') + 26) % 26) + 'A';
             }
         }
         else if (line[index] >= 'a' && line[index] <= 'z')
         {
             if (key_sequence_line[index] >= 'A' && key_sequence_line[index_decrypt] <= 'Z')
             {
-                decrypted[index] = (((line[index] - 'a') + (key_sequence_line[index_decrypt] + 'A') + 26) % 26) + 'a';
+                decrypted[index] = (((line[index] - 'a') - (key_sequence_line[index_decrypt] - 'A') + 26) % 26) + 'a';
             }
             else if (key_sequence_line[index] >= 'a' && key_sequence_line[index_decrypt] <= 'z')
             {
-                decrypted[index] = (((line[index] - 'a') + (key_sequence_line[index_decrypt] + 'a') + 26) % 26) + 'a';
+                decrypted[index] = (((line[index] - 'a') - (key_sequence_line[index_decrypt] - 'a') + 26) % 26) + 'a';
             }
         }
         else
