@@ -195,7 +195,6 @@ void encrypt_file()
     {
         sequence_file(key_sequence_file, line, keystring, index_sequence);
     }
-    cout << "The Squence: " << key_sequence_file;
 }
 void sequence_file(char key_sequence_file[], string line, string keystring, int& index_sequence)
 {
