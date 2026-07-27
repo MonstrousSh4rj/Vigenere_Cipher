@@ -2,6 +2,7 @@
 #include<cstring>
 #include<string>
 #include<fstream>
+#include<sstream>
 using namespace std;
 void input(char sentence[], char key[]);
 void sequence(char sentence[], char key[], char words_sequence[]);
@@ -9,6 +10,7 @@ void encrypt(char sentence[], char words_sequence[], char encrypted[]);
 void decrypt(char sentence[], char words_sequence[], char encrypted[]);
 void encrypt_file();
 void sequence_file(char key_sequence_file[], string line, string keystring, int& index_sequence);
+void encrypt_line_file(string line, char key_sequence_line[], int &index_encrypt, char encrypted[] );
 void display(char[]);
 int main()
 {
@@ -187,7 +189,6 @@ void encrypt_file()
     cout << "Enter key: ";
     getline(cin, keystring);
     ifstream infile(i_file);
-    ofstream outfile(o_file);
     string line;
     char key_sequence_file[1000];
     int index_sequence = 0;
@@ -195,6 +196,19 @@ void encrypt_file()
     {
         sequence_file(key_sequence_file, line, keystring, index_sequence);
     }
+    infile.close();
+    ifstream infile_1(i_file);
+    ofstream outfile(o_file);
+    int index_encrypt = 0;
+    char encrypted[1000];
+    while (getline(infile, line))
+    {
+        encrypt_line_file(line, key_sequence_file, index_encrypt, encrypted);
+        outfile << encrypted;
+    }
+    infile.close();
+    outfile.close();
+    cout << "Encrypted contents saved to " << o_file << endl;
 }
 void sequence_file(char key_sequence_file[], string line, string keystring, int& index_sequence)
 {
@@ -218,4 +232,41 @@ void sequence_file(char key_sequence_file[], string line, string keystring, int&
         }
     }
     key_sequence_file[index_sequence] = '\0';
+}
+void encrypt_line_file(string line, char key_sequence_line[], int &index_encrypt, char encrypted[])
+{
+    int index = 0;
+    int length_line = line.length();
+    while (index < length_line)
+    {
+        if (line[index] >= 'A' && line[index] <= 'Z')
+        {
+            if (key_sequence_line[index] >= 'A' && key_sequence_line[index_encrypt] <= 'Z')
+            {
+                encrypted[index] = (((line[index] - 'A') + (key_sequence_line[index_encrypt] - 'A')) % 26) + 'A';
+            }
+            else if (key_sequence_line[index] >= 'a' && key_sequence_line[index_encrypt] <= 'z')
+            {
+                encrypted[index] = (((line[index] - 'A') + (key_sequence_line[index_encrypt] - 'a')) % 26) + 'a';
+            }
+        }
+        else if (line[index] >= 'a' && line[index] <= 'z')
+        {
+            if (key_sequence_line[index] >= 'A' && key_sequence_line[index_encrypt] <= 'Z')
+            {
+                encrypted[index] = (((line[index] - 'a') + (key_sequence_line[index_encrypt] - 'A')) % 26) + 'A';
+            }
+            else if (key_sequence_line[index] >= 'a' && key_sequence_line[index_encrypt] <= 'z')
+            {
+                encrypted[index] = (((line[index] - 'a') + (key_sequence_line[index_encrypt] - 'a')) % 26) + 'a';
+            }
+        }
+        else
+        {
+            encrypted[index] = line[index];
+        }
+        index++;
+        index_encrypt++;
+    }
+    encrypted[index] = '\0';
 }
