@@ -1,12 +1,14 @@
 #include<iostream>
 #include<cstring>
 #include<string>
+#include<fstream>
 using namespace std;
 void input(char sentence[], char key[]);
 void sequence(char sentence[], char key[], char words_sequence[]);
 void encrypt(char sentence[], char words_sequence[], char encrypted[]);
 void decrypt(char sentence[], char words_sequence[], char encrypted[]);
 void encrypt_file();
+void sequence_file(char key_sequence_file[], string line, string keystring, int& index_sequence);
 void display(char[]);
 int main()
 {
@@ -25,7 +27,7 @@ int main()
             cout << "======Vigenere Cipher======" << endl;
             cout << "Enter Choice: ";
             cin >> choice;
-        } while (!(choice >= 1 && choice <= 3));
+        } while (!(choice >= 1 && choice <= 5));
         switch (choice)
         {
         case 1:
@@ -52,6 +54,7 @@ int main()
         }
         case 3:
         {
+            encrypt_file();
             break;
         }
         case 4:
@@ -69,7 +72,7 @@ int main()
             break;
         }
         }
-    } while (choice != 3);
+    } while (choice != 5);
     return 0;
 }
 void input(char sentence[], char key[])
@@ -172,4 +175,48 @@ void display(char result[])
         cout << result[d];
     }
     cout << endl;
+}
+void encrypt_file()
+{
+    string i_file, o_file, keystring;
+    cout << "Enter input file: ";
+    cin.ignore();
+    getline(cin, i_file);
+    cout << "Enter output file: ";
+    getline(cin, o_file);
+    cout << "Enter key: ";
+    getline(cin, keystring);
+    ifstream infile(i_file);
+    ofstream outfile(o_file);
+    string line;
+    char key_sequence_file[1000];
+    int index_sequence = 0;
+    while (getline(infile, line))
+    {
+        sequence_file(key_sequence_file, line, keystring, index_sequence);
+    }
+    cout << "The Squence: " << key_sequence_file;
+}
+void sequence_file(char key_sequence_file[], string line, string keystring, int& index_sequence)
+{
+    int length = 0;
+    length = keystring.length();
+    int a = 0, line_length = 0;
+    line_length = line.length();
+    while (a != line_length)
+    {
+        if (line[a] != ' ')
+        {
+            key_sequence_file[index_sequence] = keystring[a % length];
+            a++;
+            index_sequence++;
+        }
+        else
+        {
+            key_sequence_file[index_sequence] = ' ';
+            a++;
+            index_sequence++;
+        }
+    }
+    key_sequence_file[index_sequence] = '\0';
 }
