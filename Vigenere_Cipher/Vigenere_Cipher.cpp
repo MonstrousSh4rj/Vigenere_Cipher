@@ -31,6 +31,12 @@ int main()
             cout << "======Vigenere Cipher======" << endl;
             cout << "Enter Choice: ";
             cin >> choice;
+            if ((choice < 1 || choice > 5) || cin.fail())
+            {
+                cin.clear();
+                cin.ignore(1000, '\n');
+                cout << "Invalid choice! Try again." << endl;
+            }
         } while (!(choice >= 1 && choice <= 5));
         switch (choice)
         {
@@ -83,10 +89,28 @@ int main()
 void input(char sentence[], char key[])
 {
     cin.ignore();
+    Sentence:
     cout << "Enter sentence: ";
     cin.getline(sentence, 100);
-    cout << "Enter key: ";
-    cin.getline(key, 100);
+    for (int a = 0; key[a] != '\0'; a++)
+    {
+        if (!((sentence[a] >= 'A' && sentence[a] <= 'Z') || (sentence[a] >= 'a' && sentence[a] <= 'z')))
+        {
+            cout << "No special Characters!" << endl;
+            goto Sentence;
+        }
+    }
+    Key:
+    cout << "Enter Key: ";
+    cin.getline(sentence, 100);
+    for (int a = 0; key[a] != '\0'; a++)
+    {
+        if (!((key[a] >= 'A' && key[a] <= 'Z') || (key[a] >= 'a' && key[a] <= 'z')))
+        {
+            cout << "No special Characters!" << endl;
+            goto Key;
+        }
+    }
 }
 void sequence(char sentence[], char key[], char words_sequence[])
 {
@@ -189,8 +213,18 @@ void encrypt_file()
     getline(cin, i_file);
     cout << "Enter output file: ";
     getline(cin, o_file);
-    cout << "Enter key: ";
+    Keystring:
+    cout << "Enter Key: ";
     getline(cin, keystring);
+    int limit = keystring.length();
+    for (int a = 0; a<limit; a++)
+    {
+        if (!((keystring[a] >= 'A' && keystring[a] <= 'Z') || (keystring[a] >= 'a' && keystring[a] <= 'z')))
+        {
+            cout << "No special Characters!" << endl;
+            goto Keystring;
+        }
+    }
     ifstream infile(i_file);
     string line;
     char key_sequence_file[1000];
