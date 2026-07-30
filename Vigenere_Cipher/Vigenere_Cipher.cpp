@@ -94,7 +94,7 @@ void input(char sentence[], char key[])
     cin.getline(sentence, 100);
     for (int a = 0; sentence[a] != '\0'; a++)
     {
-        if (!((sentence[a] >= 'A' && sentence[a] <= 'Z') || (sentence[a] >= 'a' && sentence[a] <= 'z')))
+        if (!((sentence[a] >= 'A' && sentence[a] <= 'Z') || (sentence[a] >= 'a' && sentence[a] <= 'z')||(sentence[a]==' ')))
         {
             cout << "No special Characters!" << endl;
             goto Sentence;
