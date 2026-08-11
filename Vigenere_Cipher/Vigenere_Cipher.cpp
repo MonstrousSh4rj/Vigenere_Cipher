@@ -257,7 +257,7 @@ void sequence_file(char key_sequence_file[], string line, string keystring, int&
     {
         if (line[a] != ' ')
         {
-            key_sequence_file[index_sequence] = keystring[a % length];
+            key_sequence_file[index_sequence] = keystring[index_sequence % length];
             a++;
             index_sequence++;
         }
